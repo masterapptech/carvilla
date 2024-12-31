@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <style>
+      .customdiv {
+        font-size: small;
+       text-align: center;
+        margin: 8px;
+        background-color: rgb(255, 255, 255);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex">
+      <div style="width: 20%">
+        <img
+          src="images/price.webp"
+          alt=""
+          style="width: 25px; height: 25px"
+          class="m-2"
+        />
+        <label for=""><b> Buget</b></label>
+        <div style="display: flex">
+          <input type="text" class="form-control m-2" value="100000" />
+          <input type="text" class="form-control m-2" value="1500000" />
+        </div>
+        <input type="range" class="w-100 m-2" />
+        <div>
+          <span class="text-black-50">Minimum</span>
+          <span class="text-black-50" style="margin-left: 40%">Maximum</span>
+        </div>
+        <p class="text-black-50 mt-2">Suggestions</p>
+        <div>
+          <button class="btn btn-outline-danger rounded m-1">
+            Under 3 Lakh
+          </button>
+          <button class="btn btn-outline-danger rounded m-1">
+            From 3 Lakh to 5 Lakh
+          </button>
+          <button class="btn btn-outline-danger rounded m-1">
+            From 5 Lakh to 10 Lakh
+          </button>
+          <button class="btn btn-outline-danger rounded m-1">
+            Above 10 Lakh
+          </button>
+        </div>
+        <img
+          src="images/brand.webp"
+          alt=""
+          style="width: 25px; height: 25px"
+          class="m-2"
+        />
+        <label for=""><b> Make and Model</b></label>
+        <input
+          type="text"
+          class="form-control m-2"
+          placeholder="Search a brand or model"
+        />
+
+        <div class="m-2">
+          <input type="checkbox" class="form-check-input" /> Honda
+          <span class="text-black-50"> (9) </span> <br />
+          <input type="checkbox" class="form-check-input" /> Renault
+          <span class="text-black-50"> (5) </span> <br />
+          <input type="checkbox" class="form-check-input" /> Ford
+          <span class="text-black-50"> (8) </span> <br />
+          <input type="checkbox" class="form-check-input" /> Tata Nexon
+          <span class="text-black-50"> (17) </span> <br />
+        </div>
+      </div>
+      <div style="width: 80%; padding: 2%; display: flex">
+        <div class="w-25 h-25 rounded-3 p-2 m-2 shadow-sm">
+          <img src="images/c1.webp" alt="" class="w-75 h-75" />
+          <hr />
+          <div
+            style="
+              background: linear-gradient(
+                0deg,
+                rgb(172, 246, 247) 0%,
+                rgb(253, 253, 253) 100%
+              );
+            "
+            class="p-1"
+          >
+            <h5>2018 Ford Eco Sport RXL MT</h5>
+            <div class="row">
+              <div class="col customdiv">Top Model</div>
+              <div class="col customdiv">40,882 Km</div>
+              <div class="col customdiv">Petrol</div>
+              <div class="col customdiv">1st Owner</div>
+            </div>
+            <h6>EMI ₹ 12,756/m</h6>
+            <label class="fw-bold" style="font-size: x-large">₹6.5L</label>
+            <strike class="text-black-50">₹8.5L </strike>
+            <label>Other Charges</label>
+            <p>Free Test Drive Today</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
