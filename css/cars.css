@@ -1,0 +1,160 @@
+.navElement {
+  width: 12%;
+  margin: 2%;
+  text-transform: uppercase;
+  color: white;
+}
+button:hover {
+  background-color: blueviolet;
+}
+.selectClass {
+  width: 25%;
+  text-align: center;
+  padding: 15px;
+  margin: 15px;
+  font-weight: bold;
+}
+.selectChild {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid red;
+}
+
+.carbox {
+  border: 1px solid gray;
+  margin: 2%;
+  padding: 10px;
+  padding-bottom: 150px;
+  box-shadow: 10px 10px 30px -8px rgb(0, 0, 0);
+  width: 33.33%;
+}
+.carbox:hover {
+  background-color: rgba(125, 15, 227, 0.917);
+  color: white;
+}
+.btnClass {
+  padding: 15px;
+  background-color: rgba(255, 139, 24, 0.655);
+  border-radius: 8px;
+  box-shadow: 10px 10px 10px -8px rgb(0, 0, 0);
+}
+.pClass {
+  height: 8px;
+  background-color: blueviolet;
+  width: 100px;
+  border-radius: 5px;
+}
+.carBorder {
+  border: 1px solid black;
+  margin: 15px;
+  padding: 15px;
+  box-shadow: 10px 10px 30px -8px rgb(0, 0, 0);
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+@keyframes newanimate {
+  from {
+    margin-left: 20%;
+  }
+  to {
+    margin-left: 80%;
+  }
+}
+.lranimation {
+  animation-name: newanimate;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  animation-timing-function: linear;
+}
+.iconClass {
+  padding: 15px;
+  margin: 15px;
+}
+
+/*======================= ====================== ================= ================== =*/
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+header {
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.hamburger {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  display: none; /* Hide by default */
+}
+
+.hamburger.active {
+  transform: rotate(90deg);
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 200px;
+  background: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(50px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s, transform 0.3s;
+}
+
+.menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu li {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  transition: 0.3s;
+}
+
+.menu li a:hover {
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show button on smaller screens */
+  }
+
+  .navElement {
+    display: none;
+  }
+  header{
+    display: block;
+  }
+}

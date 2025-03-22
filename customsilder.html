@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Looping Slider</title>
+    <style>
+        /* Main Container */
+        .slider-container {
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #fff;
+        }
+
+        /* Slides Wrapper */
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Individual Slide */
+        .slide {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px;
+            flex-shrink: 0; /* Prevent squishing */
+        }
+
+        .slide img {
+            width: 50%;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .content {
+            width: 45%;
+            padding-left: 20px;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .text {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Navigation Arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            z-index: 2;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* Dots Navigation */
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slides">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="images/c1.png" alt="Luxury Vehicle">
+                <div class="content">
+                    <h2 class="title">Premium Comfort</h2>
+                    <p class="text">Experience unparalleled luxury and advanced technology in our flagship model.</p>
+                    <button class="cta-button">Explore Features</button>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="images/c1.png" alt="Sports Car">
+                <div class="content">
+                    <h2 class="title">Adrenaline Boost</h2>
+                    <p class="text">Discover raw power and precision engineering in our performance series.</p>
+                    <button class="cta-button">View Specs</button>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="images/c1.png" alt="Family SUV">
+                <div class="content">
+                    <h2 class="title">Family Adventure</h2>
+                    <p class="text">Spacious comfort meets rugged capability for your next journey.</p>
+                    <button class="cta-button">See Options</button>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide">
+                <img src="images/c1.png" alt="Electric Vehicle">
+                <div class="content">
+                    <h2 class="title">Eco Future</h2>
+                    <p class="text">Sustainable innovation with zero-compromise performance.</p>
+                    <button class="cta-button">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="arrow prev" aria-label="Previous slide">❮</button>
+        <button class="arrow next" aria-label="Next slide">❯</button>
+        <div class="dots"></div>
+    </div>
+
+    <script>
+        const slider = {
+            index: 0,
+            slides: document.querySelector('.slides'),
+            dotsContainer: document.querySelector('.dots'),
+            slidesCount: document.querySelectorAll('.slide').length,
+            interval: null,
+
+            init() {
+                // Create dots
+                this.createDots();
+                
+                // Event listeners
+                document.querySelector('.prev').addEventListener('click', () => this.move(-1));
+                document.querySelector('.next').addEventListener('click', () => this.move(1));
+                this.dotsContainer.addEventListener('click', e => {
+                    if (e.target.classList.contains('dot')) {
+                        const index = [...e.target.parentNode.children].indexOf(e.target);
+                        this.jumpTo(index);
+                    }
+                });
+
+                // Auto-play
+                this.startAutoPlay();
+                
+                // Initial position
+                this.update();
+            },
+
+            createDots() {
+                this.dotsContainer.innerHTML = Array(this.slidesCount)
+                    .fill()
+                    .map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}" aria-label="Slide ${i + 1}"></div>`)
+                    .join('');
+            },
+
+            move(step) {
+                this.index += step;
+                this.update();
+            },
+
+            jumpTo(index) {
+                this.index = index;
+                this.update();
+                this.resetAutoPlay();
+            },
+
+            update() {
+                // Handle infinite loop
+                this.index = (this.index + this.slidesCount) % this.slidesCount;
+                
+                // Update slides position
+                this.slides.style.transform = `translateX(-${this.index * 100}%)`;
+                
+                // Update dots
+                document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+                this.dotsContainer.children[this.index].classList.add('active');
+            },
+
+            startAutoPlay() {
+                this.interval = setInterval(() => this.move(1), 5000);
+            },
+
+            resetAutoPlay() {
+                clearInterval(this.interval);
+                this.startAutoPlay();
+            }
+        };
+
+        // Initialize slider
+        slider.init();
+
+        // Optional: Add touch support
+        let touchStartX = 0;
+        const sliderContainer = document.querySelector('.slider-container');
+        
+        sliderContainer.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        sliderContainer.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > 50) {
+                slider.move(diff > 0 ? 1 : -1);
+            }
+        });
+    </script>
+</body>
+</html>
